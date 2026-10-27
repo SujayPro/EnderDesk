@@ -21,6 +21,18 @@ distinctive theme, a native launcher and a privacy-first feature set.
 - **EnderGram themes** — Noir (gunmetal/indigo) and Frost (cool white) with a
   custom night-scene chat wallpaper
 
+## Preview
+
+<p align="center">
+  <img src="docs/ui-main.jpg" alt="EnderGram main window" width="820">
+</p>
+
+<p align="center">
+  <img src="docs/ui-settings.jpg" alt="EnderGram settings" width="310">
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="docs/ui-about.jpg" alt="EnderGram settings categories" width="310">
+</p>
+
 ## Download
 
 | Build | File |
