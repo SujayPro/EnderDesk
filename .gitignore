@@ -1,0 +1,16 @@
+# Build outputs and prebuilt inputs (regenerate locally)
+/build/
+/dist/
+/vendor/
+/tools/
+__pycache__/
+*.pyc
+*.pyo
+*.log
+*.deb
+*.AppImage
+*.tar.gz
+.venv/
+venv/
+/scripts/
+/BRANDING_REPORT.md

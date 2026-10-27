@@ -1,0 +1,22 @@
+[Desktop Entry]
+Name=EnderGram
+Comment=Desktop version of EnderGram - ToS breaking Telegram client
+TryExec=EnderGram
+Exec=env DESKTOPINTEGRATION=1 EnderGram -- %U
+Icon=com.endergram.desktop
+Terminal=false
+StartupWMClass=EnderGram
+Type=Application
+Categories=Chat;Network;InstantMessaging;Qt;
+MimeType=x-scheme-handler/tg;x-scheme-handler/tonsite;
+Keywords=tg;chat;im;messaging;messenger;sms;telegram;tdesktop;
+Actions=quit;
+DBusActivatable=true
+SingleMainWindow=true
+X-GNOME-UsesNotifications=true
+X-GNOME-SingleWindow=true
+
+[Desktop Action quit]
+Exec=EnderGram -quit
+Name=Quit EnderGram
+Icon=application-exit

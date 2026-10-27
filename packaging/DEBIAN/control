@@ -1,0 +1,21 @@
+Package: endergram
+Version: 1.0.0-10
+Section: net
+Priority: optional
+Architecture: amd64
+Maintainer: Sujay Jain <contact@sujay.pro>
+Installed-Size: 273884
+Depends: libc6 (>= 2.28), libglib2.0-0 | libglib2.0-0t64, libfontconfig1, libfreetype6, libcairo2, libpango-1.0-0, libpangocairo-1.0-0, libpangoft2-1.0-0
+Recommends: libpulse0 | pipewire-pulse, libasound2 | libasound2t64, xdg-utils, xdg-desktop-portal, fonts-open-sans
+Suggests: libwebkit2gtk-4.1-0
+Conflicts: ayugram-desktop
+Replaces: ayugram-desktop
+Provides: ayugram-desktop
+Homepage: https://github.com/SujayPro/EnderDesk
+Description: EnderGram - fast, low-memory Telegram desktop client
+ EnderGram is a Telegram-compatible desktop client for Linux with ghost mode,
+ saved message history, message filters, built-in translation, streamer mode
+ and deep customisation. This package ships the native EnderGram launcher and
+ engine, desktop integration, icons and the Noir and Frost themes. The default
+ launch profile targets about 250 MB RSS and uses XWayland raster rendering;
+ --gpu restores hardware acceleration.

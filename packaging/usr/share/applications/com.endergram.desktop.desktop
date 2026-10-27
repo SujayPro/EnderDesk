@@ -1,0 +1,36 @@
+[Desktop Entry]
+Name=EnderGram
+GenericName=Telegram Client
+Comment=Fast, low-memory Telegram desktop client
+Comment[ru]=Клиент Telegram с брендингом EnderGram
+TryExec=endergram
+Exec=endergram -- %U
+Icon=com.endergram.desktop
+Terminal=false
+StartupNotify=true
+StartupWMClass=EnderGram
+Type=Application
+Categories=Chat;Network;InstantMessaging;Qt;
+MimeType=x-scheme-handler/tg;x-scheme-handler/tonsite;
+Keywords=tg;chat;im;messaging;messenger;sms;telegram;tdesktop;endergram;
+Actions=quit;gpu;titlebar;
+DBusActivatable=false
+SingleMainWindow=true
+X-GNOME-UsesNotifications=true
+X-GNOME-SingleWindow=true
+
+[Desktop Action quit]
+Exec=endergram -quit
+Name=Quit EnderGram
+Name[ru]=Выйти из EnderGram
+Icon=application-exit
+
+[Desktop Action gpu]
+Name=Launch EnderGram with GPU acceleration
+Exec=endergram --gpu -- %U
+Icon=video-display
+
+[Desktop Action titlebar]
+Name=Launch EnderGram with native titlebar
+Exec=endergram --titlebar -- %U
+Icon=window

@@ -1,0 +1,37 @@
+EnderGram 1.0.0
+Project: https://github.com/SujayPro/EnderDesk
+Telegram channel: https://t.me/EnderGramNews
+Chat: https://t.me/EnderGramChat
+===================================
+
+EnderGram is an independent fork of the AyuGram Desktop codebase, which is
+itself a fork of Telegram Desktop.
+
+Upstream application: https://github.com/AyuGram/AyuGramDesktop
+Telegram Desktop:     https://github.com/telegramdesktop/tdesktop
+Linux packaging base: https://github.com/stillemptyNOW/AyuGram-For-Linux
+
+The Telegram-compatible engine is the upstream GPL-3.0 (with OpenSSL
+exception) application. The EnderGram launcher and branding build tooling
+are released under GPL-3.0-or-later.
+
+This is an unofficial community build. It is not affiliated with Telegram FZ-LLC,
+AyuGram, or Radolyn Labs. AyuGram includes features that may violate
+Telegram's Terms of Service. Use at your own risk.
+
+The complete corresponding source is available in the EnderGram project
+directory supplied with this build, including the upstream source tree.
+
+
+Design note
+-----------
+The dark palette is inspired by the public design language of Command Code
+(commandcode.ai). No Command Code artwork, logo, copy, code, or private
+Figma files are included. The theme is a palette-only interpretation.
+
+
+Window decoration note
+----------------------
+The default launch writes a scoped KWin rule to the user's
+~/.config/kwinrulesrc (backup: kwinrulesrc.endergram.bak) to remove the native
+titlebar from EnderGram's main window. Use --titlebar to opt out.

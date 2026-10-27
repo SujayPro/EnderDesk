@@ -1,0 +1,16 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: AyuGram Desktop
+Upstream-Contact: Radolyn Labs
+Source: https://github.com/AyuGram/AyuGramDesktop
+
+Files: *
+Copyright: 2014-2026 Telegram Desktop contributors
+           2023-2026 Radolyn Labs and AyuGram contributors
+License: GPL-3.0-or-later-with-OpenSSL-exception
+ This program is free software: you can redistribute it and/or modify it
+ under the terms of the GNU General Public License as published by the Free
+ Software Foundation, either version 3 of the License, or (at your option)
+ any later version, with the OpenSSL linking exception.
+ .
+ On Debian systems the complete GPL-3 text is in
+ /usr/share/common-licenses/GPL-3.

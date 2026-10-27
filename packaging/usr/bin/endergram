@@ -1,0 +1,124 @@
+#!/bin/bash
+# EnderGram launcher
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
+# Native launcher: prepares the low-memory profile, applies the KWin frameless
+# rule and executes the EnderGram engine. No external runtime required.
+
+set -u
+
+backend="${ENDERGRAM_BACKEND:-}"
+if [ -z "$backend" ] && [ -n "${BASH_SOURCE[0]:-}" ]; then
+	dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" 2>/dev/null && pwd)"
+	for candidate in \
+		"$dir/../lib/endergram/EnderGram" \
+		"$dir/../../../build/endergram-root/usr/lib/endergram/EnderGram"; do
+		[ -x "$candidate" ] && { backend="$candidate"; break; }
+	done
+fi
+[ -n "$backend" ] || backend=/usr/lib/endergram/EnderGram
+if [ ! -x "$backend" ]; then
+	echo "EnderGram: engine not found at $backend" >&2
+	echo "Reinstall the endergram package or set ENDERGRAM_BACKEND." >&2
+	exit 127
+fi
+
+gpu=0
+[ -n "${ENDERGRAM_GPU:-}" ] && gpu=1
+frameless=1
+args=()
+for arg in "$@"; do
+	case "$arg" in
+		--gpu) gpu=1 ;;
+		--low-memory) gpu=0 ;;
+		--titlebar) frameless=0 ;;
+		--frameless) frameless=1 ;;
+		*) args+=("$arg") ;;
+	esac
+done
+
+# -- profile migration -------------------------------------------------------
+for pair in \
+	".local/share/AyuGramDesktop:.local/share/EnderGram" \
+	".cache/AyuGramDesktop:.cache/EnderGram" \
+	".config/AyuGramDesktop:.config/EnderGram"; do
+	old="$HOME/${pair%%:*}"; new="$HOME/${pair##*:}"
+	[ -e "$old" ] && [ ! -e "$new" ] && mv "$old" "$new" 2>/dev/null
+done
+
+# -- KWin frameless rule (Plasma only) ---------------------------------------
+set_frameless() { # $1 = 0|1
+	local desktop
+	desktop="$(echo "${XDG_CURRENT_DESKTOP:-}" | tr 'A-Z' 'a-z')"
+	case "$desktop" in *kde*) ;; *) return 0 ;; esac
+
+	local kwc krc cfg count rules
+	kwc="$(command -v kwriteconfig6 || command -v kwriteconfig5 || true)"
+	krc="$(command -v kreadconfig6 || command -v kreadconfig5 || true)"
+	[ -n "$kwc" ] && [ -n "$krc" ] || return 0
+	cfg="${XDG_CONFIG_HOME:-$HOME/.config}/kwinrulesrc"
+
+	if [ -f "$cfg" ] && [ ! -f "$cfg.endergram.bak" ]; then
+		cp "$cfg" "$cfg.endergram.bak" 2>/dev/null
+	fi
+	count="$("$krc" --file kwinrulesrc --group General --key count 2>/dev/null | tr -dc 0-9)"
+	count="${count:-0}"
+	rules="$("$krc" --file kwinrulesrc --group General --key rules 2>/dev/null)"
+
+	if [ "$1" = 1 ]; then
+		case ",$rules," in
+			*,endergram,*) ;;
+			*) rules="${rules:+$rules,}endergram"
+			   "$kwc" --file kwinrulesrc --group General --key count "$((count + 1))" ;;
+		esac
+		"$kwc" --file kwinrulesrc --group General --key rules "$rules"
+		"$kwc" --file kwinrulesrc --group endergram --key Description "EnderGram (frameless)"
+		"$kwc" --file kwinrulesrc --group endergram --key wmclass "EnderGram"
+		"$kwc" --file kwinrulesrc --group endergram --key wmclasscomplete "false"
+		"$kwc" --file kwinrulesrc --group endergram --key wmclassmatch "1"
+		"$kwc" --file kwinrulesrc --group endergram --key types "1"
+		"$kwc" --file kwinrulesrc --group endergram --key noborder "true"
+		"$kwc" --file kwinrulesrc --group endergram --key noborderrule "2"
+		"$kwc" --file kwinrulesrc --group endergram --key decorationpolicy "none"
+		"$kwc" --file kwinrulesrc --group endergram --key decorationpolicyrule "2"
+	else
+		case ",$rules," in
+			*,endergram,*) ;;
+			*) return 0 ;;
+		esac
+		rules="$(echo ",$rules," | sed 's/,endergram,/,/g; s/^,//; s/,$//')"
+		"$kwc" --file kwinrulesrc --group General --key rules "$rules"
+		[ "$count" -gt 0 ] && "$kwc" --file kwinrulesrc --group General --key count "$((count - 1))"
+		"$kwc" --file kwinrulesrc --group endergram --key Description --delete 2>/dev/null
+		"$kwc" --file kwinrulesrc --group endergram --key wmclass --delete 2>/dev/null
+		"$kwc" --file kwinrulesrc --group endergram --key wmclasscomplete --delete 2>/dev/null
+		"$kwc" --file kwinrulesrc --group endergram --key wmclassmatch --delete 2>/dev/null
+		"$kwc" --file kwinrulesrc --group endergram --key types --delete 2>/dev/null
+		"$kwc" --file kwinrulesrc --group endergram --key noborder --delete 2>/dev/null
+		"$kwc" --file kwinrulesrc --group endergram --key noborderrule --delete 2>/dev/null
+		"$kwc" --file kwinrulesrc --group endergram --key decorationpolicy --delete 2>/dev/null
+		"$kwc" --file kwinrulesrc --group endergram --key decorationpolicyrule --delete 2>/dev/null
+	fi
+	command -v qdbus6 >/dev/null 2>&1 && qdbus6 org.kde.KWin /KWin reconfigure >/dev/null 2>&1
+	command -v qdbus >/dev/null 2>&1 && qdbus org.kde.KWin /KWin reconfigure >/dev/null 2>&1
+	return 0
+}
+
+set_frameless "$frameless"
+
+# -- environment -------------------------------------------------------------
+[ -n "${DESKTOPINTEGRATION:-}" ] || export DESKTOPINTEGRATION=1
+[ -n "${GLIBC_TUNABLES:-}" ] || export GLIBC_TUNABLES="glibc.malloc.arena_max=1:glibc.malloc.trim_threshold=131072:glibc.malloc.mmap_threshold=131072"
+
+if [ "$gpu" = 0 ]; then
+	if [ -n "${DISPLAY:-}" ]; then
+		export QT_QPA_PLATFORM=xcb
+		export QT_XCB_GL_INTEGRATION=none
+	else
+		echo "EnderGram: low-memory mode needs XWayland; using native Wayland with GPU." >&2
+	fi
+elif [ -z "${QT_QPA_PLATFORM:-}" ] && [ -n "${WAYLAND_DISPLAY:-}" ]; then
+	export QT_QPA_PLATFORM="wayland;xcb"
+fi
+
+exec -a EnderGram "$backend" ${args[@]+"${args[@]}"}

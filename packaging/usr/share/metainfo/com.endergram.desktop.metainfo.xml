@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component type="desktop-application">
+  <id>com.endergram.desktop</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later WITH OpenSSL-exception</project_license>
+  <name>EnderGram</name>
+  <summary>Fast, low-memory Telegram desktop client for Linux</summary>
+  <developer id="win.endergram">
+    <name>EnderGram</name>
+  </developer>
+  <description>
+    <p>EnderGram is a Telegram-compatible desktop client for Linux with ghost mode, saved message history, message filters, built-in translation, streamer mode and deep customisation.</p>
+    <p>It ships a native shell launcher with a low-memory profile (about 250 MB RSS), XWayland raster rendering by default and optional GPU acceleration, plus the Noir and Frost themes.</p>
+  </description>
+  <categories>
+    <category>Network</category>
+    <category>InstantMessaging</category>
+  </categories>
+  <url type="homepage">https://github.com/SujayPro/EnderDesk</url>
+  <launchable type="desktop-id">com.endergram.desktop.desktop</launchable>
+  <provides>
+    <binary>endergram</binary>
+    <binary>EnderGram</binary>
+  </provides>
+  <releases>
+    <release version="1.0.0" date="2026-10-27">
+      <description>
+        <p>First public release: low-memory launcher, Noir and Frost themes, custom chat wallpaper, ghost mode, filters, translation and streamer mode.</p>
+      </description>
+    </release>
+  </releases>
+  <content_rating type="oars-1.1">
+    <content_attribute id="social-chat">intense</content_attribute>
+    <content_attribute id="social-audio">intense</content_attribute>
+    <content_attribute id="social-contacts">intense</content_attribute>
+    <content_attribute id="money-purchasing">intense</content_attribute>
+  </content_rating>
+</component>

@@ -1,0 +1,36 @@
+<RCC>
+    <qresource prefix="/gui">
+        <file alias="art/ender/alt/app.svg">../../art/ender/alt/app.svg</file>
+        <file alias="art/ender/alt/app_icon.ico">../../art/ender/alt/app_icon.ico</file>
+        <file alias="art/ender/bard/app.svg">../../art/ender/bard/app.svg</file>
+        <file alias="art/ender/bard/app_icon.ico">../../art/ender/bard/app_icon.ico</file>
+        <file alias="art/ender/chibi/app.png">../../art/ender/chibi/app.png</file>
+        <file alias="art/ender/chibi/app_icon.ico">../../art/ender/chibi/app_icon.ico</file>
+        <file alias="art/ender/chibi2/app.png">../../art/ender/chibi2/app.png</file>
+        <file alias="art/ender/chibi2/app_icon.ico">../../art/ender/chibi2/app_icon.ico</file>
+        <file alias="art/ender/default/app.svg">../../art/ender/default/app.svg</file>
+        <file alias="art/ender/default/app_icon.ico">../../art/ender/default/app_icon.ico</file>
+        <file alias="art/ender/discord/app.svg">../../art/ender/discord/app.svg</file>
+        <file alias="art/ender/discord/app_icon.ico">../../art/ender/discord/app_icon.ico</file>
+        <file alias="art/ender/extera/app.svg">../../art/ender/extera/app.svg</file>
+        <file alias="art/ender/extera/app_icon.ico">../../art/ender/extera/app_icon.ico</file>
+        <file alias="art/ender/extera2/app.svg">../../art/ender/extera2/app.svg</file>
+        <file alias="art/ender/extera2/app_icon.ico">../../art/ender/extera2/app_icon.ico</file>
+        <file alias="art/ender/nothing/app.svg">../../art/ender/nothing/app.svg</file>
+        <file alias="art/ender/nothing/app_icon.ico">../../art/ender/nothing/app_icon.ico</file>
+        <file alias="art/ender/spotify/app.svg">../../art/ender/spotify/app.svg</file>
+        <file alias="art/ender/spotify/app_icon.ico">../../art/ender/spotify/app_icon.ico</file>
+        <file alias="art/ender/win95/app.png">../../art/ender/win95/app.png</file>
+        <file alias="art/ender/win95/app_icon.ico">../../art/ender/win95/app_icon.ico</file>
+        <file alias="art/ender/yaplus/app.svg">../../art/ender/yaplus/app.svg</file>
+        <file alias="art/ender/yaplus/app_icon.ico">../../art/ender/yaplus/app_icon.ico</file>
+        <file alias="icons/ender/nocover.svg">../../icons/ender/nocover.svg</file>
+        <file alias="icons/ender/donates/boosty.svg">../../icons/ender/donates/boosty.svg</file>
+        <file alias="icons/ender/donates/ton.svg">../../icons/ender/donates/ton.svg</file>
+        <file alias="icons/ender/donates/bitcoin.svg">../../icons/ender/donates/bitcoin.svg</file>
+        <file alias="icons/ender/donates/ethereum.svg">../../icons/ender/donates/ethereum.svg</file>
+        <file alias="icons/ender/donates/solana.svg">../../icons/ender/donates/solana.svg</file>
+        <file alias="icons/ender/donates/tron.svg">../../icons/ender/donates/tron.svg</file>
+        <file alias="icons/ender/donates/support_logo.svg">../../icons/ender/donates/support_logo.svg</file>
+    </qresource>
+</RCC>
